@@ -3,25 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TokoFand — Closing Kit</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>TokoFand — Closing Kit v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --card: #161616;
-    --border: #2a2a2a;
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --card: #181818;
+    --border: #252525;
     --accent: #c8f542;
     --accent2: #f5c842;
     --accent3: #42d4f5;
-    --red: #ff4d4d;
-    --text: #f0f0f0;
-    --muted: #888;
-    --tag-price: #ff6b35;
-    --tag-quality: #7c3aed;
-    --tag-urgency: #0ea5e9;
-    --tag-trust: #16a34a;
-    --tag-general: #6b7280;
+    --muted: #666;
+    --text: #efefef;
+    --tag-harga: #ff6b35;
+    --tag-kualitas: #a855f7;
+    --tag-urgensi: #38bdf8;
+    --tag-trust: #4ade80;
+    --tag-umum: #94a3b8;
+    --tag-harga-bg: rgba(255,107,53,0.08);
+    --tag-kualitas-bg: rgba(168,85,247,0.08);
+    --tag-urgensi-bg: rgba(56,189,248,0.08);
+    --tag-trust-bg: rgba(74,222,128,0.08);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,59 +32,88 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Space Mono', monospace;
+    font-family: 'DM Mono', monospace;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  /* ── HEADER ── */
-  header {
-    border-bottom: 2px solid var(--border);
-    padding: 2rem 2.5rem 1.5rem;
+  /* NAV TABS */
+  .nav {
     position: sticky;
     top: 0;
-    background: var(--bg);
-    z-index: 100;
+    z-index: 200;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    padding: 0 2rem;
+    gap: 0;
   }
 
-  .logo {
+  .nav-logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1.4rem;
-    letter-spacing: -0.02em;
+    font-size: 1rem;
+    padding: 1.1rem 1.5rem 1.1rem 0;
+    border-right: 1px solid var(--border);
+    margin-right: 1rem;
+    white-space: nowrap;
   }
-  .logo span { color: var(--accent); }
+  .nav-logo span { color: var(--accent); }
 
-  .header-badge {
-    font-size: 0.65rem;
-    background: var(--accent);
-    color: #000;
-    padding: 0.3rem 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+  .nav-tab {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: 1.1rem 1.2rem;
+    cursor: pointer;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
   }
 
-  /* ── HERO ── */
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ════════════════════════════
+     PAGE 1 — CLOSING KIT
+  ════════════════════════════ */
+
   .hero {
-    padding: 3rem 2.5rem 2rem;
-    border-bottom: 2px solid var(--border);
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 30px,
-      rgba(200,245,66,0.015) 30px,
-      rgba(200,245,66,0.015) 60px
-    );
+    padding: 3.5rem 2.5rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
   }
 
-  .hero-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
+  .hero::after {
+    content: 'CLOSING';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.02);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
     color: var(--accent);
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -90,829 +122,1060 @@
   .hero h1 {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.8rem;
   }
 
-  .hero h1 em {
-    font-style: normal;
-    color: var(--accent);
-    position: relative;
-  }
+  .hero h1 .hl { color: var(--accent); }
 
-  .hero p {
+  .hero-sub {
     color: var(--muted);
-    font-size: 0.8rem;
-    max-width: 540px;
+    font-size: 0.72rem;
     line-height: 1.7;
+    max-width: 480px;
   }
 
-  /* ── FILTER TABS ── */
+  /* FILTER */
   .filter-bar {
-    padding: 1.2rem 2.5rem;
-    border-bottom: 2px solid var(--border);
+    padding: 1rem 2.5rem;
+    border-bottom: 1px solid var(--border);
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
     align-items: center;
+    background: var(--surface);
   }
 
-  .filter-label {
+  .f-label { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-right: 0.3rem; }
+
+  .fbtn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-right: 0.5rem;
-  }
-
-  .filter-btn {
-    background: transparent;
-    border: 1.5px solid var(--border);
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    padding: 0.4rem 0.9rem;
+    padding: 0.35rem 0.85rem;
     cursor: pointer;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    border-radius: 2px;
     transition: all 0.15s;
   }
+  .fbtn:hover { color: var(--text); border-color: #444; }
+  .fbtn.active[data-f="all"] { border-color: var(--accent); color: var(--accent); background: rgba(200,245,66,0.06); }
+  .fbtn.active[data-f="harga"] { border-color: var(--tag-harga); color: var(--tag-harga); background: var(--tag-harga-bg); }
+  .fbtn.active[data-f="kualitas"] { border-color: var(--tag-kualitas); color: var(--tag-kualitas); background: var(--tag-kualitas-bg); }
+  .fbtn.active[data-f="urgensi"] { border-color: var(--tag-urgensi); color: var(--tag-urgensi); background: var(--tag-urgensi-bg); }
+  .fbtn.active[data-f="trust"] { border-color: var(--tag-trust); color: var(--tag-trust); background: var(--tag-trust-bg); }
+  .fbtn.active[data-f="umum"] { border-color: var(--tag-umum); color: var(--tag-umum); background: rgba(148,163,184,0.07); }
 
-  .filter-btn:hover, .filter-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(200,245,66,0.07);
-  }
-
-  .filter-btn[data-cat="harga"].active { border-color: var(--tag-price); color: var(--tag-price); background: rgba(255,107,53,0.07); }
-  .filter-btn[data-cat="kualitas"].active { border-color: var(--tag-quality); color: var(--tag-quality); background: rgba(124,58,237,0.07); }
-  .filter-btn[data-cat="urgensi"].active { border-color: var(--tag-urgency); color: var(--tag-urgency); background: rgba(14,165,233,0.07); }
-  .filter-btn[data-cat="kepercayaan"].active { border-color: var(--tag-trust); color: var(--tag-trust); background: rgba(22,163,74,0.07); }
-  .filter-btn[data-cat="umum"].active { border-color: var(--muted); color: var(--text); background: rgba(255,255,255,0.05); }
-
-  /* ── GRID ── */
-  .grid-wrapper {
-    padding: 2rem 2.5rem;
+  /* CARD GRID */
+  .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1px;
     background: var(--border);
+    padding: 1px;
   }
 
-  /* ── CARD ── */
-  .card {
+  .closing-card {
     background: var(--card);
-    padding: 1.6rem;
-    position: relative;
-    overflow: hidden;
+    padding: 0;
     transition: background 0.2s;
+    position: relative;
   }
+  .closing-card:hover { background: #1e1e1e; }
+  .closing-card.hidden { display: none; }
 
-  .card:hover { background: #1c1c1c; }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--card-accent, var(--accent));
+  .card-accent-bar {
+    height: 3px;
+    width: 100%;
   }
+  .closing-card[data-cat="harga"] .card-accent-bar { background: var(--tag-harga); }
+  .closing-card[data-cat="kualitas"] .card-accent-bar { background: var(--tag-kualitas); }
+  .closing-card[data-cat="urgensi"] .card-accent-bar { background: var(--tag-urgensi); }
+  .closing-card[data-cat="trust"] .card-accent-bar { background: var(--tag-trust); }
+  .closing-card[data-cat="umum"] .card-accent-bar { background: var(--tag-umum); }
 
-  .card[data-cat="harga"] { --card-accent: var(--tag-price); }
-  .card[data-cat="kualitas"] { --card-accent: var(--tag-quality); }
-  .card[data-cat="urgensi"] { --card-accent: var(--tag-urgency); }
-  .card[data-cat="kepercayaan"] { --card-accent: var(--tag-trust); }
-  .card[data-cat="umum"] { --card-accent: var(--muted); }
+  .card-inner { padding: 1.4rem 1.5rem 1.5rem; }
 
-  .card-top {
+  .card-header {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
     gap: 0.5rem;
-    margin-bottom: 0.9rem;
   }
 
-  .card-num {
+  .card-title {
     font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.5rem;
-    line-height: 1;
-    color: rgba(255,255,255,0.05);
-    position: absolute;
-    top: 0.8rem;
-    right: 1.2rem;
-    pointer-events: none;
+    font-weight: 700;
+    font-size: 0.92rem;
+    line-height: 1.3;
+    flex: 1;
   }
 
-  .tag {
-    font-size: 0.55rem;
+  .cat-tag {
+    font-size: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    padding: 0.25rem 0.65rem;
-    border: 1.5px solid;
-    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
+  .closing-card[data-cat="harga"] .cat-tag { border-color: var(--tag-harga); color: var(--tag-harga); }
+  .closing-card[data-cat="kualitas"] .cat-tag { border-color: var(--tag-kualitas); color: var(--tag-kualitas); }
+  .closing-card[data-cat="urgensi"] .cat-tag { border-color: var(--tag-urgensi); color: var(--tag-urgensi); }
+  .closing-card[data-cat="trust"] .cat-tag { border-color: var(--tag-trust); color: var(--tag-trust); }
+  .closing-card[data-cat="umum"] .cat-tag { border-color: var(--tag-umum); color: var(--tag-umum); }
 
-  .tag-harga { border-color: var(--tag-price); color: var(--tag-price); }
-  .tag-kualitas { border-color: var(--tag-quality); color: var(--tag-quality); }
-  .tag-urgensi { border-color: var(--tag-urgency); color: var(--tag-urgency); }
-  .tag-kepercayaan { border-color: var(--tag-trust); color: var(--tag-trust); }
-  .tag-umum { border-color: var(--muted); color: var(--muted); }
-
-  .card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    line-height: 1.3;
-    margin-bottom: 0.6rem;
-    padding-right: 3rem;
-  }
-
-  .situation {
-    font-size: 0.65rem;
+  .situasi {
+    font-size: 0.62rem;
     color: var(--muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
     line-height: 1.5;
+    margin-bottom: 1rem;
+    padding-left: 0.6rem;
+    border-left: 2px solid #2a2a2a;
   }
+  .situasi b { color: var(--accent2); }
 
-  .situation strong {
-    color: var(--accent2);
-    font-weight: 700;
-  }
-
-  .script-label {
-    font-size: 0.55rem;
+  /* WA BUBBLE STYLE */
+  .wa-label {
+    font-size: 0.52rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--muted);
     margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
+  .wa-label::before { content: '💬'; }
 
-  .script {
-    background: #0d0d0d;
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--card-accent, var(--accent));
-    padding: 1rem 1.1rem;
-    font-size: 0.72rem;
-    line-height: 1.7;
-    color: #d0d0d0;
+  .wa-bubble {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 0 12px 12px 12px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: #d8d8d8;
+    white-space: pre-wrap;
+    margin-bottom: 0.9rem;
     position: relative;
-    margin-bottom: 0.8rem;
   }
 
-  .script em {
-    color: var(--accent);
-    font-style: normal;
-    font-weight: 700;
+  .wa-bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -6px;
+    border: 6px solid transparent;
+    border-right-color: #2a2a2a;
+    border-top-color: #2a2a2a;
   }
 
   .copy-btn {
-    background: transparent;
-    border: 1.5px solid var(--border);
+    width: 100%;
+    background: none;
+    border: 1px solid var(--border);
     color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    padding: 0.4rem 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.55rem;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    width: 100%;
     transition: all 0.15s;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    border-radius: 2px;
   }
+  .copy-btn:hover { color: var(--text); border-color: #444; }
+  .copy-btn.ok { border-color: #4ade80; color: #4ade80; }
 
-  .copy-btn:hover {
-    border-color: var(--card-accent, var(--accent));
-    color: var(--card-accent, var(--accent));
-  }
-
-  .copy-btn.copied {
-    border-color: #16a34a;
-    color: #16a34a;
-  }
-
-  .tip {
+  .pro-tip {
     font-size: 0.6rem;
-    color: #555;
+    color: #444;
     line-height: 1.6;
-    margin-top: 0.8rem;
-    padding-top: 0.8rem;
+    margin-top: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid #2a2a2a;
+  }
+  .pro-tip::before { content: '⚡ PRO TIP — '; color: var(--accent2); font-weight: 500; }
+
+  /* ════════════════════════════
+     PAGE 2 — HARGA
+  ════════════════════════════ */
+
+  .pricing-hero {
+    padding: 3.5rem 2.5rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .pricing-hero::after {
+    content: 'PRICE';
+    position: absolute;
+    right: -1rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.02);
+    pointer-events: none;
+  }
+  .pricing-hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.8rem;
+  }
+  .pricing-hero h1 .hl { color: var(--accent2); }
+  .pricing-hero p { color: var(--muted); font-size: 0.72rem; line-height: 1.7; max-width: 480px; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    padding: 1px;
+    margin: 0;
+  }
+
+  .price-card {
+    background: var(--card);
+    padding: 2rem 1.8rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .price-card:hover { background: #1d1d1d; }
+  .price-card.featured {
+    background: #161a10;
+  }
+  .price-card.featured:hover { background: #1c2214; }
+
+  .featured-badge {
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 0.7rem;
+  }
+
+  .price-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .price-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .price-tagline {
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .price-amount {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.2rem;
+    line-height: 1;
+  }
+  .price-amount .cur { font-size: 1.1rem; color: var(--muted); vertical-align: super; }
+  .price-amount .unit { font-size: 0.7rem; color: var(--muted); font-weight: 400; }
+
+  .price-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.4rem 0;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-bottom: 1.5rem;
+  }
+  .feature-list li {
+    font-size: 0.68rem;
+    color: #bbb;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.5;
+  }
+  .feature-list li .ic { flex-shrink: 0; margin-top: 1px; }
+  .feature-list li.off { color: #444; }
+
+  .price-cta {
+    width: 100%;
+    padding: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: none;
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+  .price-cta:hover { border-color: #555; color: var(--text); }
+  .price-card.featured .price-cta {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+    font-weight: 700;
+  }
+  .price-card.featured .price-cta:hover { background: #d4f55a; }
+
+  /* JAWAB HARGA SECTION */
+  .answer-section {
+    padding: 3rem 2.5rem;
     border-top: 1px solid var(--border);
   }
 
-  .tip::before {
-    content: '💡 ';
-  }
-
-  /* ── SECTION HEADER ── */
-  .section-header {
-    background: var(--border);
-    grid-column: 1 / -1;
-    padding: 0.7rem 1.6rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .section-header span {
-    font-size: 0.6rem;
-    text-transform: uppercase;
+  .section-eyebrow {
+    font-size: 0.58rem;
     letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .answer-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .answer-section > p {
+    color: var(--muted);
+    font-size: 0.68rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 520px;
+  }
+
+  .skrip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .skrip-block {
+    background: var(--card);
+    padding: 1.5rem;
+  }
+
+  .skrip-block h4 {
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
   }
 
-  .section-header .line {
-    flex: 1;
-    height: 1px;
-    background: #333;
+  .skrip-block .sub {
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    line-height: 1.5;
   }
 
-  /* ── FOOTER ── */
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--accent);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.7rem 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    z-index: 999;
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
   footer {
-    border-top: 2px solid var(--border);
-    padding: 2rem 2.5rem;
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.5rem;
   }
-
-  footer p {
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
-
+  footer p { font-size: 0.6rem; color: #333; }
   footer strong { color: var(--accent); }
 
-  /* HIDDEN class for filter */
-  .card.hidden { display: none; }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--accent);
-    color: #000;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.8rem 1.4rem;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-    z-index: 999;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .toast.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
   @media (max-width: 600px) {
-    header, .hero, .filter-bar, footer { padding-left: 1.2rem; padding-right: 1.2rem; }
-    .grid-wrapper { padding: 0; }
-    .card { padding: 1.3rem 1.2rem; }
+    .nav { padding: 0 1rem; }
+    .nav-tab { padding: 1rem 0.8rem; font-size: 0.6rem; }
+    .hero, .pricing-hero, .answer-section { padding: 2rem 1.2rem; }
+    .filter-bar { padding: 0.8rem 1.2rem; }
+    .cards-grid, .pricing-grid, .skrip-grid { grid-template-columns: 1fr; }
+    .card-inner { padding: 1.2rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">Toko<span>Fand</span> <span style="color:var(--muted);font-weight:400;font-size:0.8rem;">/ Closing Kit</span></div>
-  <div class="header-badge">Internal Use</div>
-</header>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Toko<span>Fand</span></div>
+  <button class="nav-tab active" data-page="closing">💬 Closing Kit</button>
+  <button class="nav-tab" data-page="harga">💰 Paket Harga</button>
+</nav>
 
-<!-- HERO -->
-<div class="hero">
-  <p class="hero-label">// Sales Playbook — Web Dev Services</p>
-  <h1>Teknik Closing<br><em>yang Efektif</em></h1>
-  <p>Kumpulan skrip siap pakai untuk merespons calon klien di contact support — mulai dari keberatan soal harga hingga keraguan kualitas. Copy, paste, kirim.</p>
-</div>
+<!-- ══════════════════════════════════════
+     PAGE 1 — CLOSING KIT
+══════════════════════════════════════ -->
+<div class="page active" id="page-closing">
 
-<!-- FILTER -->
-<div class="filter-bar">
-  <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" data-cat="all">Semua</button>
-  <button class="filter-btn" data-cat="harga">💸 Harga</button>
-  <button class="filter-btn" data-cat="kualitas">⭐ Kualitas</button>
-  <button class="filter-btn" data-cat="urgensi">⚡ Urgensi</button>
-  <button class="filter-btn" data-cat="kepercayaan">🤝 Kepercayaan</button>
-  <button class="filter-btn" data-cat="umum">📋 Umum</button>
-</div>
-
-<!-- GRID -->
-<div class="grid-wrapper" id="grid">
-
-  <!-- ══ SECTION: HARGA ══ -->
-  <div class="section-header">
-    <span style="color:var(--tag-price)">💸 Keberatan Harga</span>
-    <div class="line"></div>
+  <div class="hero">
+    <p class="hero-eyebrow">// TokoFand — Sales Playbook v2</p>
+    <h1>Teknik Closing<br><span class="hl">Natural & Efektif</span></h1>
+    <p class="hero-sub">Skrip siap salin — gaya chat WA beneran, bukan robot. Tinggal copy, sesuaiin nama, kirim.</p>
   </div>
 
-  <!-- Card 1 -->
-  <div class="card" data-cat="harga">
-    <span class="card-num">01</span>
-    <div class="card-top">
-      <h3>Value Reframing<br>(Harga vs Investasi)</h3>
-      <span class="tag tag-harga">Harga</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien bilang "mahal" atau "budget-nya terbatas"</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s1">
-Saya ngerti kak, dan saya hargai kejujurannya 🙏
-
-Tapi boleh saya jelasin dulu yang kakak dapet?
-
-Website yang kita bangun bukan cuma "halaman online" — tapi aset bisnis yang:
-✅ Tampil profesional 24 jam
-✅ Bisa convert pengunjung jadi pembeli
-✅ Dibangun pakai teknologi modern (Next.js + Supabase/Firebase)
-✅ Fast loading & SEO-ready
-
-Kalau misalnya website ini bantu dapet 1-2 klien/pembeli baru per bulan — itu udah balik modal dalam hitungan hari, kak.
-
-Investasi sekali, keuntungannya jangka panjang. 📈
-
-Mau kita diskusiin dulu kebutuhannya biar saya bisa kasih paket yang paling pas?
-    </div>
-    <button class="copy-btn" onclick="copyScript('s1', this)">📋 Salin Skrip</button>
-    <p class="tip">Jangan defend harga — redirect ke VALUE yang mereka dapat. Buat mereka mikir ROI, bukan cost.</p>
+  <div class="filter-bar">
+    <span class="f-label">Filter:</span>
+    <button class="fbtn active" data-f="all">Semua</button>
+    <button class="fbtn" data-f="harga">💸 Harga</button>
+    <button class="fbtn" data-f="kualitas">⭐ Kualitas</button>
+    <button class="fbtn" data-f="urgensi">⚡ Urgensi</button>
+    <button class="fbtn" data-f="trust">🤝 Kepercayaan</button>
+    <button class="fbtn" data-f="umum">📋 Umum</button>
   </div>
 
-  <!-- Card 2 -->
-  <div class="card" data-cat="harga">
-    <span class="card-num">02</span>
-    <div class="card-top">
-      <h3>Perbandingan Biaya<br>(vs Freelancer Murah)</h3>
-      <span class="tag tag-harga">Harga</span>
+  <div class="cards-grid" id="cards-grid">
+
+    <!-- ── HARGA ── -->
+
+    <div class="closing-card" data-cat="harga">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Jawab "Mahal" → Redirect ke Value</div>
+          <span class="cat-tag">Harga</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien bilang harganya kemahalan atau budgetnya terbatas</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c1">hehe iya kak, wajar kok kalau kedengerannya gitu 😄
+
+tapi boleh saya jelasin dulu yang kakak dapet?
+
+ini bukan sekedar "website" biasa —
+✅ desain custom, bukan template murahan
+✅ loading cepet, mobile-friendly
+✅ teknologi modern (Next.js + Firebase/Supabase)
+✅ bisa dipake jangka panjang
+
+kalau misalnya dari website ini kakak dapet 1-2 pembeli baru per bulan aja...
+itu balik modal dalam hitungan hari, kak 📈
+
+jadi sebenernya ini investasi, bukan expense 😊
+
+mau kita obrolin dulu kebutuhannya biar saya bisa kasih paket yang paling cocok?</div>
+        <button class="copy-btn" onclick="copyCard('c1',this)">📋 Salin</button>
+        <p class="pro-tip">Jangan defend harga. Langsung redirect ke ROI yang mereka bisa bayangin.</p>
+      </div>
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien bilang ada yang lebih murah di tempat lain</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s2">
-Oh iya kak, pasti banyak yang lebih murah 😄
 
-Tapi boleh saya tanya — website murah yang pernah kakak liat, tech stack-nya apa? Support-nya gimana kalau ada error? Apakah ada revisi dan aftercare-nya?
+    <div class="closing-card" data-cat="harga">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Ada yang Lebih Murah di Tempat Lain</div>
+          <span class="cat-tag">Harga</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien bilang nemuin yang lebih murah / ngebandingin harga</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c2">oh iya pasti ada kak, banyak malah yang lebih murah 😄
 
-Saya pernah lihat kasus klien yang awalnya pilih yang murah, terus 3 bulan kemudian bayar lagi untuk rebuild karena situsnya lambat, nggak mobile-friendly, atau developernya ghosting.
+tapi boleh saya tanya balik —
+website murahnya itu pake teknologi apa?
+kalau ada bug, siapa yang benerin?
+ada revisi-nya nggak?
 
-Sama kaya beli baju — bisa pilih yang Rp50rb atau yang Rp300rb. Bedanya keliatan setelah dipake setahun.
+saya pernah lihat kasus klien yang pilih yang murah,
+3 bulan kemudian bayar lagi buat rebuild dari nol
+karena situsnya lambat, atau developernya nggak bisa dihubungi lagi 😅
 
-Yang saya tawarkan: transparansi penuh, teknologi modern, dan saya nggak ghosting setelah proyek selesai ✅
+beda kayak beli baju Rp50rb sama Rp300rb —
+keliatan bedanya setelah dipake setahun
 
-Kalau kakak mau, kita bisa mulai dari paket yang lebih ringan dulu?
+yang saya tawarkan: ada aftercare-nya, teknologinya modern, dan saya nggak ghosting 😊
+
+kalau mau, kita bisa mulai dari paket yang lebih kecil dulu kok!</div>
+        <button class="copy-btn" onclick="copyCard('c2',this)">📋 Salin</button>
+        <p class="pro-tip">Jangan jelek-jelekin kompetitor secara langsung. Cukup raise awareness soal risikonya.</p>
+      </div>
     </div>
-    <button class="copy-btn" onclick="copyScript('s2', this)">📋 Salin Skrip</button>
-    <p class="tip">Jangan jelek-jelekin kompetitor — cukup raise awareness soal risiko "murah asal-asalan".</p>
-  </div>
 
-  <!-- Card 3 -->
-  <div class="card" data-cat="harga">
-    <span class="card-num">03</span>
-    <div class="card-top">
-      <h3>Teknik Cicil / Paket Fleksibel</h3>
-      <span class="tag tag-harga">Harga</span>
+    <div class="closing-card" data-cat="harga">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Beneran Budgetnya Terbatas</div>
+          <span class="cat-tag">Harga</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien tertarik tapi genuinely dananya lagi tipis</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c3">saya ngerti banget kak, budget itu real 🙏
+
+gini aja —
+kita bisa mulai dari yang lebih simpel dulu:
+
+🔹 landing page dulu (yang paling penting buat convert pengunjung)
+🔹 nanti kalau udah jalan, baru kita tambahin fitur-fiturnya
+
+jadi kakak nggak harus keluar banyak sekarang
+kita bangun fondasi dulu yang beneran solid
+
+ini justru pendekatan yang lebih smart secara finansial 😊
+
+kakak bisa alokasiin berapa kira-kira?
+nanti saya sesuaiin scope-nya</div>
+        <button class="copy-btn" onclick="copyCard('c3',this)">📋 Salin</button>
+        <p class="pro-tip">Kasih opsi, bukan ultimatum. Klien yang merasa punya kontrol lebih mudah closing.</p>
+      </div>
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien tertarik tapi genuinely dananya terbatas</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s3">
-Saya paham banget kak, budget itu real constraint 🙏
 
-Begini — kita bisa mulai dari versi yang lebih lean dulu:
+    <div class="closing-card" data-cat="harga">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Jawab "Berapa Harganya?" Langsung</div>
+          <span class="cat-tag">Harga</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien nanya harga langsung, belum jelasin kebutuhannya</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c4">harganya tergantung kebutuhannya kak 😊
 
-🔹 Paket Starter: Landing page profesional (bisa langsung convert)
-🔹 Paket Scale-up: Tambah fitur bertahap setelah bisnis mulai jalan
+tapi biar gampang, ini range-nya:
 
-Jadi kakak nggak harus keluar banyak sekarang — kita bangun fondasi dulu yang solid, sisanya bisa kita upgrade nanti.
+🔹 Landing Page — mulai 100rb - 500rb
+   (cocok buat promosi, portofolio, profil bisnis)
 
-Ini justru pendekatan yang lebih smart secara finansial.
+🔹 Toko Online / CMS — mulai 500rb - 1jt
+   (ada fitur produk, keranjang, atau kelola konten sendiri)
 
-Mau kita coba hitung dulu berapa yang bisa kakak alokasiin? Nanti saya sesuaikan scope-nya 😊
+yang bikin beda bukan cuma harganya —
+tapi tech stack-nya modern, loading cepet, dan ada after-support-nya
+
+biar saya bisa kasih estimasi yang pas:
+websitenya buat apa kak? dan ada fitur khusus yang dibutuhkan?</div>
+        <button class="copy-btn" onclick="copyCard('c4',this)">📋 Salin</button>
+        <p class="pro-tip">Selalu kasih range dulu, lalu qualify kebutuhan mereka. Jangan langsung sebut 1 angka — klien bisa kabur sebelum denger value-nya.</p>
+      </div>
     </div>
-    <button class="copy-btn" onclick="copyScript('s3', this)">📋 Salin Skrip</button>
-    <p class="tip">Kasih opsi, bukan ultimatum. Klien yang merasa punya kontrol lebih mudah closing.</p>
-  </div>
 
-  <!-- Card 4 -->
-  <div class="card" data-cat="harga">
-    <span class="card-num">04</span>
-    <div class="card-top">
-      <h3>Anchor Price<br>(Buat Harga Terasa Kecil)</h3>
-      <span class="tag tag-harga">Harga</span>
+    <!-- ── KUALITAS ── -->
+
+    <div class="closing-card" data-cat="kualitas">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Ragu Kualitasnya → Kasih Bukti</div>
+          <span class="cat-tag">Kualitas</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien tanya "hasilnya bagus nggak?" atau keliatan ragu</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c5">pertanyaan yang bagus kak, dan saya suka klien yang kritis 😄
+
+daripada saya jawab "iya bagus" —
+mending kakak lihat sendiri:
+
+👉 [link portfolio kamu]
+
+yang bisa kakak cek langsung:
+• desain-nya modern atau nggak
+• loadingnya cepet atau lemot
+• tampilannya enak di hp atau nggak
+
+saya nggak minta percaya kata-kata saya
+saya minta lihat hasil kerja saya dulu 🙏
+
+habis liat, ada yang mau ditanyain?</div>
+        <button class="copy-btn" onclick="copyCard('c5',this)">📋 Salin</button>
+        <p class="pro-tip">Bukti visual 10x lebih kuat dari deskripsi. Selalu siap 2-3 link portfolio terbaik.</p>
+      </div>
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien belum punya referensi harga, ragu di angka yang ditawarkan</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s4">
-Kalau kakak pakai agency besar, website sejenis bisa kena Rp15-50 juta ke atas 📊
 
-Tapi dengan TokoFand, kakak dapet kualitas setara dengan harga yang jauh lebih terjangkau — karena saya handle langsung, tanpa overhead tim besar.
+    <div class="closing-card" data-cat="kualitas">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Takut Hasilnya Nggak Sesuai Ekspektasi</div>
+          <span class="cat-tag">Kualitas</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien takut bayar tapi hasilnya mengecewakan</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c6">wajar banget kak, itu kekhawatiran yang masuk akal 🙏
 
-Kakak basically bayar harga freelancer tapi dapet kualitas & profesionalisme yang biasanya cuma ada di agency.
+makanya alur kerja saya ada checkpoint-nya:
 
-Saya rasa itu worth it banget, kak 😉
+1️⃣ briefing detail di awal — kita samain dulu visinya
+2️⃣ saya kirim preview / mockup sebelum mulai develop
+3️⃣ ada revisi sampai kakak puas
+4️⃣ baru serah terima + support setelah launch
+
+jadi kakak nggak gelap-gelapan dari awal 😊
+kita bareng dari step pertama sampai finish
+
+kalau di tengah jalan ada yang kurang cocok —
+kita fix bareng, simple
+
+masih ada yang mau ditanyain soal prosesnya?</div>
+        <button class="copy-btn" onclick="copyCard('c6',this)">📋 Salin</button>
+        <p class="pro-tip">Transparansi proses = kepercayaan instan. Klien takut karena ngerasa nggak punya kontrol.</p>
+      </div>
     </div>
-    <button class="copy-btn" onclick="copyScript('s4', this)">📋 Salin Skrip</button>
-    <p class="tip">Anchor ke harga tertinggi di pasaran dulu, baru reveal harga kamu. Persepsi "murah" langsung terbentuk.</p>
-  </div>
 
-  <!-- ══ SECTION: KUALITAS ══ -->
-  <div class="section-header">
-    <span style="color:var(--tag-quality)">⭐ Keraguan Kualitas</span>
-    <div class="line"></div>
-  </div>
+    <!-- ── URGENSI ── -->
 
-  <!-- Card 5 -->
-  <div class="card" data-cat="kualitas">
-    <span class="card-num">05</span>
-    <div class="card-top">
-      <h3>Show Don't Tell<br>(Portfolio + Bukti Nyata)</h3>
-      <span class="tag tag-kualitas">Kualitas</span>
+    <div class="closing-card" data-cat="urgensi">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">"Dipikir Dulu" Tanpa Alasan Jelas</div>
+          <span class="cat-tag">Urgensi</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien bilang "nanti deh" atau tiba-tiba nggak bales</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c7">santai kak, no pressure sama sekali 😊
+
+cuma mau info aja —
+saya handle proyek secara terbatas biar kualitasnya tetap terjaga
+
+bulan ini slotnya udah mulai penuh
+kalau kakak nunggu terlalu lama, bisa jadi harus antri atau harganya udah naik
+
+bukan mau nge-rush kakak ya —
+tapi sayang aja kalau kakak udah fix butuhnya 😅
+
+kalau masih ada yang mau ditanyain sebelum mutusin, saya siap bantu 🙏</div>
+        <button class="copy-btn" onclick="copyCard('c7',this)">📋 Salin</button>
+        <p class="pro-tip">Scarcity harus jujur. Jangan bohong soal slot — reputasi jauh lebih berharga dari satu deal.</p>
+      </div>
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien tanya "hasilnya bagus nggak?" atau ragu dengan kemampuan</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s5">
-Pertanyaan yang bagus kak, dan saya suka klien yang kritis 😄
 
-Daripada saya jawab "iya bagus" — mending kakak lihat langsung:
+    <div class="closing-card" data-cat="urgensi">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Klien Ngerasa "Nanti Juga Bisa"</div>
+          <span class="cat-tag">Urgensi</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien ragu mulai, merasa belum urgent</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c8">boleh saya tanya kak —
+bisnis kakak udah berapa lama jalan tanpa website? 🤔
 
-👉 [link portfolio / project Innerverse / XE4 Classroom]
+setiap hari tanpa online presence,
+ada calon pembeli yang nyari di Google —
+dan nemuin kompetitor kakak
 
-Yang akan kakak lihat:
-• Desain yang clean & modern
-• Loading yang cepat
-• Mobile-friendly
-• Fungsionalitas yang beneran jalan
+bukan nakut-nakutin ya,
+tapi ini realita di 2025-2026
 
-Saya nggak minta kakak percaya kata-kata saya — saya minta kakak lihat hasil kerja saya.
+website bukan opsi lagi, ini kebutuhan dasar
 
-Setelah lihat, ada yang mau ditanyain lebih lanjut? 🙏
+semakin cepat mulai,
+semakin cepat juga mulai keliatan hasilnya
+
+mulai kecil juga oke kok 😊
+yang penting mulai</div>
+        <button class="copy-btn" onclick="copyCard('c8',this)">📋 Salin</button>
+        <p class="pro-tip">Buat mereka visualisasikan APA yang mereka KEHILANGAN tiap hari — bukan apa yang mereka dapat.</p>
+      </div>
     </div>
-    <button class="copy-btn" onclick="copyScript('s5', this)">📋 Salin Skrip</button>
-    <p class="tip">Selalu siapkan 2-3 link portfolio terbaik. Bukti visual 10x lebih kuat dari deskripsi apapun.</p>
-  </div>
 
-  <!-- Card 6 -->
-  <div class="card" data-cat="kualitas">
-    <span class="card-num">06</span>
-    <div class="card-top">
-      <h3>Tech Stack Credibility<br>(Tunjukkan Kompetensi)</h3>
-      <span class="tag tag-kualitas">Kualitas</span>
+    <!-- ── KEPERCAYAAN ── -->
+
+    <div class="closing-card" data-cat="trust">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Klien Belum Kenal, Belum Percaya</div>
+          <span class="cat-tag">Kepercayaan</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Pertama kali kenal, masih skeptis</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c9">wajar banget kak, apalagi baru kenalan 😄
+
+tapi daripada percaya kata-kata saya —
+mending cek langsung:
+
+📂 portfolio: [link portfolio]
+💬 testimoni klien: [link / screenshot]
+🌐 project live: [link Innerverse / XE4 / dll]
+
+semua bisa kakak buka, bisa dicek speed-nya,
+bisa dilihat desainnya sendiri
+
+kepercayaan itu dibuktiin, bukan diminta 🙏
+
+ada yang mau kakak verifikasi dulu?</div>
+        <button class="copy-btn" onclick="copyCard('c9',this)">📋 Salin</button>
+        <p class="pro-tip">Kumpulkan testimoni aktif dari tiap klien. Screenshot WA pun udah powerful banget sebagai social proof.</p>
+      </div>
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien tech-savvy dan tanya soal teknologi yang dipakai</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s6">
-Great question kak 🔥
 
-Saya nggak pakai tool "drag & drop" atau template builder murahan.
+    <div class="closing-card" data-cat="trust">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Takut Ada Biaya Tersembunyi</div>
+          <span class="cat-tag">Kepercayaan</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien khawatir kena tipu atau ada cost tambahan</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c10">saya paham banget rasa was-was itu kak 😔
+banyak yang pernah kena "murah di depan, mahal di belakang"
 
-Stack yang saya pakai:
-⚡ Next.js — framework yang sama dipakai Vercel, TikTok, Netflix
-🔥 Firebase / Supabase — real-time database, bukan hosting abal-abal
-🚀 Deploy via Vercel + Cloudflare — uptime hampir 100%, global CDN
+makanya dari awal saya selalu transparan:
 
-Ini bukan overkill — ini standar industri yang bikin website kakak nggak cuma cantik, tapi juga cepat, scalable, dan aman.
+📋 scope kerjaan ditulis jelas sebelum deal
+💰 harga final disepakati di awal — nggak ada surprise
+🔁 revisi udah termasuk, bukan biaya tambahan
+📞 saya bisa dihubungi selama proses berlangsung
 
-Website yang saya bangun bisa handle ribuan visitor tanpa nge-lag 💪
+nggak ada yang disembunyiin, kak
+deal kita ya deal kita 🤝
+
+kalau mau, saya bisa kirim detail paketnya dulu biar kakak bisa baca semuanya?</div>
+        <button class="copy-btn" onclick="copyCard('c10',this)">📋 Salin</button>
+        <p class="pro-tip">Rasa takut ditipu adalah blocker terbesar. Transparansi = kepercayaan instan.</p>
+      </div>
     </div>
-    <button class="copy-btn" onclick="copyScript('s6', this)">📋 Salin Skrip</button>
-    <p class="tip">Nama-nama besar (Netflix, TikTok) sebagai referensi tech stack = instant credibility boost.</p>
-  </div>
 
-  <!-- Card 7 -->
-  <div class="card" data-cat="kualitas">
-    <span class="card-num">07</span>
-    <div class="card-top">
-      <h3>Garansi Revisi<br>(Hilangkan Risiko)</h3>
-      <span class="tag tag-kualitas">Kualitas</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien takut hasilnya nggak sesuai ekspektasi</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s7">
-Saya ngerti kekhawatirannya kak — takut udah bayar tapi hasilnya nggak sesuai 🙏
+    <!-- ── UMUM ── -->
 
-Makanya alur kerja saya ada checkpoint-nya:
+    <div class="closing-card" data-cat="umum">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Klien Udah Tanya Banyak, Belum Mutusin</div>
+          <span class="cat-tag">Umum</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Diskusi panjang tapi nggak ada keputusan</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c11">oke kak kayaknya kita udah cukup ngobrolin detailnya 😄
 
-1️⃣ Briefing detail di awal (kita align dulu visi & expectation-nya)
-2️⃣ Preview / mockup sebelum full development
-3️⃣ Revisi [X] kali sampai kakak puas
-4️⃣ Serah terima + support setelah launch
-
-Kakak nggak langsung gelap-gelapan — kita bareng dari awal sampai finish.
-
-Kalau di tengah jalan ada yang kurang cocok, kita fix bareng. Simple 😊
-    </div>
-    <button class="copy-btn" onclick="copyScript('s7', this)">📋 Salin Skrip</button>
-    <p class="tip">Transparansi proses = kepercayaan. Klien takut karena merasa nggak punya kontrol — kasih mereka kontrol itu.</p>
-  </div>
-
-  <!-- ══ SECTION: URGENSI ══ -->
-  <div class="section-header">
-    <span style="color:var(--tag-urgency)">⚡ Menciptakan Urgensi</span>
-    <div class="line"></div>
-  </div>
-
-  <!-- Card 8 -->
-  <div class="card" data-cat="urgensi">
-    <span class="card-num">08</span>
-    <div class="card-top">
-      <h3>Slot Terbatas<br>(Scarcity yang Jujur)</h3>
-      <span class="tag tag-urgensi">Urgensi</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien bilang "nanti deh", "dipikir dulu" tanpa alasan jelas</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s8">
-No pressure kak, santai 😊
-
-Cuma mau info — saya handle proyek secara terbatas biar kualitasnya tetap terjaga. Bulan ini slot saya udah hampir penuh.
-
-Kalau kakak mutusin next month, saya belum bisa jamin slot tersedia atau harga masih sama.
-
-Bukan mau nge-rush kakak ya — tapi sayang aja kalau kakak udah fix butuh website tapi harus nunggu antrian panjang.
-
-Kalau ada pertanyaan lagi sebelum kakak memutuskan, saya siap bantu 🙏
-    </div>
-    <button class="copy-btn" onclick="copyScript('s8', this)">📋 Salin Skrip</button>
-    <p class="tip">Scarcity harus jujur dan masuk akal. Jangan bilang "slot 2 lagi" kalau bohong — reputasi > 1 deal.</p>
-  </div>
-
-  <!-- Card 9 -->
-  <div class="card" data-cat="urgensi">
-    <span class="card-num">09</span>
-    <div class="card-top">
-      <h3>Cost of Inaction<br>(Biaya Nggak Gerak)</h3>
-      <span class="tag tag-urgensi">Urgensi</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien ragu mulai, ngerasa "nanti juga bisa"</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s9">
-Boleh saya tanya kak — bisnis kakak udah berapa lama jalan tanpa website? 🤔
-
-Setiap hari tanpa online presence, ada calon pembeli yang nyari produk/jasa kakak di Google — dan nemuin kompetitor.
-
-Bukan nakut-nakutin ya, tapi ini realita. Website itu bukan opsi lagi di 2025/2026 — ini kebutuhan dasar bisnis.
-
-Semakin cepat mulai, semakin cepat juga mulai kelihatan hasilnya.
-
-Kita mulai kecil juga nggak apa-apa kok 😊 Yang penting mulai.
-    </div>
-    <button class="copy-btn" onclick="copyScript('s9', this)">📋 Salin Skrip</button>
-    <p class="tip">Buat klien visualisasikan APA yang mereka KEHILANGAN setiap hari tanpa action — bukan apa yang mereka dapat.</p>
-  </div>
-
-  <!-- ══ SECTION: KEPERCAYAAN ══ -->
-  <div class="section-header">
-    <span style="color:var(--tag-trust)">🤝 Membangun Kepercayaan</span>
-    <div class="line"></div>
-  </div>
-
-  <!-- Card 10 -->
-  <div class="card" data-cat="kepercayaan">
-    <span class="card-num">10</span>
-    <div class="card-top">
-      <h3>Social Proof<br>(Testimoni & Track Record)</h3>
-      <span class="tag tag-kepercayaan">Kepercayaan</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien pertama kali kenal, belum percaya penuh</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s10">
-Wajar banget kalau kakak masih ragu, apalagi kita baru kenalan 😄
-
-Boleh saya share beberapa hal:
-
-🏆 Project yang udah jalan: Innerverse, XE4 Classroom Website, dan beberapa project klien lainnya
-💬 Testimoni: [link / screenshot testimoni]
-📂 Portfolio lengkap: [link]
-
-Kakak juga bisa cek sendiri website-website yang udah saya bangun — live, bisa dibuka, bisa dicek speed-nya langsung.
-
-Kepercayaan itu dibuktiin, bukan diminta 🙏
-
-Ada yang mau kakak verifikasi dulu sebelum lanjut?
-    </div>
-    <button class="copy-btn" onclick="copyScript('s10', this)">📋 Salin Skrip</button>
-    <p class="tip">Kumpulkan testimoni aktif dari setiap klien — screenshot WA pun udah cukup powerful sebagai social proof.</p>
-  </div>
-
-  <!-- Card 11 -->
-  <div class="card" data-cat="kepercayaan">
-    <span class="card-num">11</span>
-    <div class="card-top">
-      <h3>Transparansi Total<br>(No Hidden Cost)</h3>
-      <span class="tag tag-kepercayaan">Kepercayaan</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien khawatir ada biaya tersembunyi atau kena tipu</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s11">
-Saya paham banget rasa was-was itu kak — banyak yang pernah kena "harga awal murah, ujungnya mahal" 😔
-
-Makanya dari awal saya selalu transparan:
-
-📋 Scope pekerjaan ditulis jelas sebelum deal
-💰 Harga final disepakati di awal — nggak ada surprise cost
-🔁 Revisi sudah termasuk dalam paket (bukan biaya tambahan)
-📞 Komunikasi terbuka selama proses berlangsung
-
-Kalau ada yang nggak cocok atau ada pertanyaan, saya selalu bisa dihubungi.
-
-Nggak ada yang tersembunyi, kak. Deal kita adalah deal kita 🤝
-    </div>
-    <button class="copy-btn" onclick="copyScript('s11', this)">📋 Salin Skrip</button>
-    <p class="tip">Rasa takut ditipu adalah blocker terbesar. Transparansi = kepercayaan instan.</p>
-  </div>
-
-  <!-- Card 12 -->
-  <div class="card" data-cat="kepercayaan">
-    <span class="card-num">12</span>
-    <div class="card-top">
-      <h3>Personal Branding<br>(Story of TokoFand)</h3>
-      <span class="tag tag-kepercayaan">Kepercayaan</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien tanya "emangnya kamu siapa?" atau meragukan kredibilitas</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s12">
-Boleh saya cerita sedikit kak 😊
-
-Saya Arfandi — founder TokoFand. Saya udah develop website sejak [lama], mulai dari platform sosial media (Innerverse) sampai website komunitas dan bisnis.
-
-Saya spesialisasi di Next.js, Firebase, Supabase — teknologi yang sama dipakai startup-startup besar.
-
-TokoFand bukan agency besar dengan ratusan karyawan — tapi itu justru keunggulannya. Kakak langsung kerja sama saya, bukan diserahin ke junior yang baru belajar.
-
-Hasil kerjanya bisa kakak lihat langsung di [link portfolio] 🔥
-
-Ada pertanyaan soal background saya yang mau kakak tanyain?
-    </div>
-    <button class="copy-btn" onclick="copyScript('s12', this)">📋 Salin Skrip</button>
-    <p class="tip">Personal story yang autentik > company profile yang kaku. Orang beli dari orang, bukan dari brand.</p>
-  </div>
-
-  <!-- ══ SECTION: UMUM ══ -->
-  <div class="section-header">
-    <span style="color:var(--muted)">📋 Teknik Umum & Penutup</span>
-    <div class="line"></div>
-  </div>
-
-  <!-- Card 13 -->
-  <div class="card" data-cat="umum">
-    <span class="card-num">13</span>
-    <div class="card-top">
-      <h3>Assumptive Close<br>(Langsung ke Action)</h3>
-      <span class="tag tag-umum">Umum</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Klien sudah tanya-tanya cukup panjang, tapi belum bilang "ya" atau "tidak"</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s13">
-Oke kak, kayaknya kita udah cukup ngobrolin detailnya 😊
-
-Untuk mulai, biasanya saya minta:
-1. Brief singkat kebutuhan kakak (bisa via form atau chat)
+untuk mulai biasanya saya minta:
+1. brief singkat kebutuhannya (bisa lewat chat aja)
 2. DP [X]% untuk booking slot
 
-Saya bisa kirim form briefing-nya sekarang biar kita bisa langsung mulai planning-nya.
+saya bisa kirim form briefing-nya sekarang
+biar kita langsung bisa mulai planning-nya
 
-Kakak lebih nyaman briefing via chat atau form? 🙏
+kakak lebih nyaman briefing via chat atau form? 🙏</div>
+        <button class="copy-btn" onclick="copyCard('c11',this)">📋 Salin</button>
+        <p class="pro-tip">Assumptive close: assume mereka udah setuju, tinggal tanya "mulai gimana?" bukan "jadi mau nggak?"</p>
+      </div>
     </div>
-    <button class="copy-btn" onclick="copyScript('s13', this)">📋 Salin Skrip</button>
-    <p class="tip">Assumptive close: assume mereka udah setuju, tinggal tanya "mau mulai gimana?" bukan "jadi mau atau nggak?"</p>
+
+    <div class="closing-card" data-cat="umum">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Follow-Up yang Ghosting</div>
+          <span class="cat-tag">Umum</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien tiba-tiba diam setelah tanya-tanya</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c12">hei kak 👋
+
+sekedar follow up aja nih —
+gimana, masih ada yang bisa saya bantu jelasin soal websitenya?
+
+nggak ada pressure sama sekali ya 😊
+kalau emang belum waktunya, no worries
+
+tapi kalau kakak udah siap atau ada pertanyaan baru —
+saya siap bantu kapanpun
+
+kabarin aja ya kak 🙏</div>
+        <button class="copy-btn" onclick="copyCard('c12',this)">📋 Salin</button>
+        <p class="pro-tip">Follow up max 1x setelah 2-3 hari diam. Tone ringan tanpa pressure jauh lebih efektif dari spam.</p>
+      </div>
+    </div>
+
+    <div class="closing-card" data-cat="umum">
+      <div class="card-accent-bar"></div>
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-title">Kasih Banyak Alasan Untuk Nggak Jadi</div>
+          <span class="cat-tag">Umum</span>
+        </div>
+        <p class="situasi"><b>Situasi:</b> Klien kasih berbagai keberatan yang nggak berhenti</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="c13">hehe saya dengerin kak 😄
+
+tapi jujur — justru dari alasan-alasan itu saya makin yakin kakak butuh ini sekarang
+
+kakak bilang "budget belum besar" →
+justru karena itu, mulai dari paket kecil yang ROI-nya cepet keliatan
+
+kakak bilang "belum yakin hasilnya" →
+justru karena itu saya kasih preview dan revisi di tiap tahap
+
+kakak bilang "masih sibuk" →
+justru karena itu saya yang handle semuanya, kakak tinggal brief di awal
+
+hampir semua alasan itu sebenernya alasan yang SAMA kuatnya untuk mulai lho kak 😊</div>
+        <button class="copy-btn" onclick="copyCard('c13',this)">📋 Salin</button>
+        <p class="pro-tip">Judo technique — gunakan "energi" keberatan mereka untuk redirect ke arah yang kamu mau.</p>
+      </div>
+    </div>
+
+  </div><!-- end cards-grid -->
+
+  <footer>
+    <p>© 2026 <strong>TokoFand</strong> by Arfandi — Internal Closing Playbook v2</p>
+    <p>Semua skrip = template. Sesuaikan nama & konteks sebelum kirim 🙏</p>
+  </footer>
+
+</div><!-- end page-closing -->
+
+
+<!-- ══════════════════════════════════════
+     PAGE 2 — PAKET HARGA
+══════════════════════════════════════ -->
+<div class="page" id="page-harga">
+
+  <div class="pricing-hero">
+    <p class="hero-eyebrow">// TokoFand — Struktur Harga Jasa</p>
+    <h1>Paket<br><span class="hl">Harga Jasa</span></h1>
+    <p>Struktur paket yang transparan — bisa langsung kamu share ke calon klien atau jadiin acuan saat diskusi harga.</p>
   </div>
 
-  <!-- Card 14 -->
-  <div class="card" data-cat="umum">
-    <span class="card-num">14</span>
-    <div class="card-top">
-      <h3>The Objection Flip<br>(Ubah "Tapi" jadi "Karena")</h3>
-      <span class="tag tag-umum">Umum</span>
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="price-card">
+      <p class="price-label">Paket 01</p>
+      <div class="price-name">Starter</div>
+      <p class="price-tagline">Cocok untuk promosi singkat,<br>profil bisnis, atau event</p>
+      <div class="price-amount"><span class="cur">Rp</span> 100–250rb</div>
+      <div class="price-divider"></div>
+      <ul class="feature-list">
+        <li><span class="ic">✅</span> Landing page 1 halaman</li>
+        <li><span class="ic">✅</span> Desain custom (bukan template)</li>
+        <li><span class="ic">✅</span> Mobile-friendly & fast loading</li>
+        <li><span class="ic">✅</span> Deploy ke domain/subdomain</li>
+        <li><span class="ic">✅</span> 1–2x revisi</li>
+        <li><span class="ic">✅</span> Source code diserahkan</li>
+        <li class="off"><span class="ic">❌</span> CMS / kelola konten sendiri</li>
+        <li class="off"><span class="ic">❌</span> Fitur toko / keranjang</li>
+      </ul>
+      <button class="price-cta">Pilih Paket Ini</button>
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien kasih berbagai alasan untuk nggak jadi</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s14">
-Saya dengerin kak, dan justru alasan-alasan itu yang bikin saya yakin kakak butuh ini sekarang 😄
 
-Kakak bilang "belum ada budget besar" — justru karena itu, mulai dari paket kecil dulu yang ROI-nya lebih cepat keliatan.
-
-Kakak bilang "belum yakin hasilnya" — justru karena itu, saya kasih revisi dan checkpoint di tiap tahap.
-
-Kakak bilang "masih sibuk" — justru karena itu, saya yang handle semuanya, kakak tinggal di-brief di awal.
-
-Hampir semua keberatan itu sebenarnya alasan yang SAMA kuatnya untuk mulai, kak 😊
+    <!-- PRO -->
+    <div class="price-card featured">
+      <div class="featured-badge">⚡ Paling Laku</div>
+      <p class="price-label">Paket 02</p>
+      <div class="price-name">Pro</div>
+      <p class="price-tagline">Landing page lengkap dengan<br>fitur tambahan & konten dinamis</p>
+      <div class="price-amount"><span class="cur">Rp</span> 250–500rb</div>
+      <div class="price-divider"></div>
+      <ul class="feature-list">
+        <li><span class="ic">✅</span> Landing page multi-section</li>
+        <li><span class="ic">✅</span> Desain premium (Neo-Brutalism / Modern)</li>
+        <li><span class="ic">✅</span> Animasi & micro-interaction</li>
+        <li><span class="ic">✅</span> Form kontak / WhatsApp integration</li>
+        <li><span class="ic">✅</span> SEO dasar (meta, OG image)</li>
+        <li><span class="ic">✅</span> Deploy Vercel + Cloudflare</li>
+        <li><span class="ic">✅</span> 3x revisi</li>
+        <li><span class="ic">✅</span> Support 1 bulan setelah launch</li>
+      </ul>
+      <button class="price-cta">Pilih Paket Ini</button>
     </div>
-    <button class="copy-btn" onclick="copyScript('s14', this)">📋 Salin Skrip</button>
-    <p class="tip">Judo technique — gunakan "energi" keberatan mereka untuk push ke arah yang kamu mau. Jangan lawan, redirect.</p>
+
+    <!-- E-COMMERCE -->
+    <div class="price-card">
+      <p class="price-label">Paket 03</p>
+      <div class="price-name">E-Commerce</div>
+      <p class="price-tagline">Toko online lengkap dengan<br>manajemen produk & transaksi</p>
+      <div class="price-amount"><span class="cur">Rp</span> 500rb–1jt</div>
+      <div class="price-divider"></div>
+      <ul class="feature-list">
+        <li><span class="ic">✅</span> Semua fitur paket Pro</li>
+        <li><span class="ic">✅</span> Manajemen produk (tambah/edit/hapus)</li>
+        <li><span class="ic">✅</span> Keranjang belanja & checkout</li>
+        <li><span class="ic">✅</span> Integrasi WhatsApp order</li>
+        <li><span class="ic">✅</span> Database Supabase / Firebase</li>
+        <li><span class="ic">✅</span> Dashboard admin sederhana</li>
+        <li><span class="ic">✅</span> 5x revisi</li>
+        <li><span class="ic">✅</span> Support 2 bulan setelah launch</li>
+      </ul>
+      <button class="price-cta">Pilih Paket Ini</button>
+    </div>
+
+    <!-- CMS -->
+    <div class="price-card">
+      <p class="price-label">Paket 04</p>
+      <div class="price-name">CMS / Custom</div>
+      <p class="price-tagline">Website dengan sistem kelola konten<br>atau kebutuhan fitur spesifik</p>
+      <div class="price-amount"><span class="cur">Rp</span> 750rb–1jt+</div>
+      <div class="price-divider"></div>
+      <ul class="feature-list">
+        <li><span class="ic">✅</span> Semua fitur paket E-Commerce</li>
+        <li><span class="ic">✅</span> CMS custom (kelola artikel/blog/konten)</li>
+        <li><span class="ic">✅</span> User authentication (login/register)</li>
+        <li><span class="ic">✅</span> Real-time features (notifikasi, dll)</li>
+        <li><span class="ic">✅</span> Arsitektur scalable (Next.js + Supabase)</li>
+        <li><span class="ic">✅</span> Revisi unlimited selama development</li>
+        <li><span class="ic">✅</span> Dokumentasi teknis</li>
+        <li><span class="ic">✅</span> Support 3 bulan setelah launch</li>
+      </ul>
+      <button class="price-cta">Diskusi Kebutuhan</button>
+    </div>
+
   </div>
 
-  <!-- Card 15 -->
-  <div class="card" data-cat="umum">
-    <span class="card-num">15</span>
-    <div class="card-top">
-      <h3>Soft Follow-Up<br>(Untuk yang Ghosting)</h3>
-      <span class="tag tag-umum">Umum</span>
+  <!-- SKRIP JAWAB HARGA -->
+  <div class="answer-section">
+    <p class="section-eyebrow">// Panduan Jawab Pertanyaan Harga</p>
+    <h2>Gimana Cara Jawab<br>"Berapa Harganya?"</h2>
+    <p>Ada 2 kondisi yang sering kejadian. Pilih skrip yang sesuai situasinya.</p>
+
+    <div class="skrip-grid">
+
+      <div class="skrip-block">
+        <h4>Kondisi A — Klien Langsung Nanya Harga</h4>
+        <p class="sub">Belum cerita kebutuhannya apa. Langsung nanya angka.</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="ca">harganya tergantung kebutuhannya kak 😊
+
+tapi biar gampang, ini range-nya:
+
+🔹 Landing Page sederhana — mulai 100rb
+🔹 Landing Page lengkap / Pro — 250–500rb
+🔹 Toko Online / E-commerce — 500rb–1jt
+🔹 Website CMS / custom — 750rb ke atas
+
+yang bikin beda bukan cuma tampilan —
+tapi teknologinya modern, loading cepet, dan ada support-nya
+
+biar saya bisa kasih estimasi yang pas:
+websitenya buat apa kak?
+ada fitur khusus yang dibutuhin nggak?</div>
+        <button class="copy-btn" onclick="copyCard('ca',this)">📋 Salin</button>
+      </div>
+
+      <div class="skrip-block">
+        <h4>Kondisi B — Klien Udah Cerita Kebutuhannya</h4>
+        <p class="sub">Sudah tau dia butuh apa. Langsung recommend paket yang cocok.</p>
+        <p class="wa-label">Skrip WA</p>
+        <div class="wa-bubble" id="cb">oke dari yang kakak ceritain tadi —
+kebutuhannya masuk ke paket [Starter/Pro/E-Commerce] nih 😊
+
+harganya sekitar [Rp XXX]
+
+yang kakak dapet:
+✅ [fitur 1]
+✅ [fitur 2]
+✅ [fitur 3]
+✅ revisi [X]x + support [X] bulan
+
+timeline-nya kira-kira [X] hari kerja
+
+gimana kak, ada yang mau ditanyain soal paketnya?
+atau langsung kita mulai briefing-nya? 🙏</div>
+        <button class="copy-btn" onclick="copyCard('cb',this)">📋 Salin</button>
+      </div>
+
     </div>
-    <p class="situation"><strong>Situasi:</strong> Klien tiba-tiba diam setelah sempat tanya-tanya</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s15">
-Hei kak 👋 sekedar follow up aja nih.
-
-Gimana, masih ada yang bisa saya bantu jelasin soal project website-nya?
-
-Nggak ada pressure ya — saya cuma mau pastiin kalau kakak butuh info tambahan atau ada pertanyaan baru, saya siap 😊
-
-Kalau emang belum waktunya, no worries juga. Tapi kalau kakak udah siap, slot bulan ini masih ada kok!
-
-[Nama kak], kabarin aja ya 🙏
-    </div>
-    <button class="copy-btn" onclick="copyScript('s15', this)">📋 Salin Skrip</button>
-    <p class="tip">Follow up 1x setelah 2-3 hari diam. Jangan spam. Tone yang ringan dan tanpa pressure jauh lebih efektif.</p>
   </div>
 
-  <!-- Card 16 -->
-  <div class="card" data-cat="umum">
-    <span class="card-num">16</span>
-    <div class="card-top">
-      <h3>The Summary Close<br>(Rangkum & Konfirmasi)</h3>
-      <span class="tag tag-umum">Umum</span>
-    </div>
-    <p class="situation"><strong>Situasi:</strong> Setelah diskusi panjang, klien seperti hampir siap</p>
-    <p class="script-label">// Skrip:</p>
-    <div class="script" id="s16">
-Oke kak, kita recap dulu ya apa yang udah kita diskusiin 😊
+  <footer>
+    <p>© 2026 <strong>TokoFand</strong> by Arfandi — Pricing Sheet v2</p>
+    <p>Harga bersifat estimasi. Sesuaikan dengan scope & kompleksitas proyek 🙏</p>
+  </footer>
 
-✅ Kebutuhan kakak: [isi sesuai brief]
-✅ Solusi yang saya tawarkan: [nama paket]
-✅ Yang kakak dapat: [fitur-fitur utama]
-✅ Timeline: [estimasi]
-✅ Harga: [nominal]
-✅ Revisi: [X] kali
-
-Semua udah align sama kebutuhan kakak?
-
-Kalau iya, kita bisa langsung lanjut ke step berikutnya 🚀
-    </div>
-    <button class="copy-btn" onclick="copyScript('s16', this)">📋 Salin Skrip</button>
-    <p class="tip">Summary close = buat klien nod "iya iya iya" berulang kali. Momentum itu yang akhirnya bawa ke "deal".</p>
-  </div>
-
-</div><!-- end grid -->
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 <strong>TokoFand</strong> by Arfandi — Internal Closing Playbook</p>
-  <p style="color:#444">Semua skrip bersifat template — sesuaikan dengan konteks percakapan aktual 🙏</p>
-</footer>
+</div><!-- end page-harga -->
 
 <!-- TOAST -->
 <div class="toast" id="toast">✓ Skrip tersalin!</div>
 
 <script>
-  // ── Copy to clipboard ──
-  function copyScript(id, btn) {
-    const el = document.getElementById(id);
-    const text = el.innerText.trim();
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = '✅ Tersalin!';
-      btn.classList.add('copied');
-      showToast();
-      setTimeout(() => {
-        btn.textContent = '📋 Salin Skrip';
-        btn.classList.remove('copied');
-      }, 2000);
+  // PAGE TABS
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('page-' + tab.dataset.page).classList.add('active');
+      window.scrollTo(0, 0);
     });
-  }
+  });
 
-  function showToast() {
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-
-  // ── Filter ──
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card');
-
-  filterBtns.forEach(btn => {
+  // FILTER
+  document.querySelectorAll('.fbtn').forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      const cat = btn.dataset.cat;
-      cards.forEach(card => {
-        if (cat === 'all' || card.dataset.cat === cat) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
+      const f = btn.dataset.f;
+      document.querySelectorAll('.closing-card').forEach(card => {
+        card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
       });
     });
   });
+
+  // COPY
+  function copyCard(id, btn) {
+    const el = document.getElementById(id);
+    navigator.clipboard.writeText(el.innerText.trim()).then(() => {
+      btn.textContent = '✅ Tersalin!';
+      btn.classList.add('ok');
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        btn.textContent = '📋 Salin';
+        btn.classList.remove('ok');
+        toast.classList.remove('show');
+      }, 2000);
+    });
+  }
 </script>
 </body>
 </html>
